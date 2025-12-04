@@ -1,0 +1,73 @@
+.specialized-industries {
+  padding: 4rem 2rem;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.industry-card {
+  background-color: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.industry-card:hover {
+  border-color: #f4c430;
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.2);
+  transform: translateY(-4px);
+}
+
+.industry-icon {
+  font-size: 3rem;
+}
+
+.industry-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .industries-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
