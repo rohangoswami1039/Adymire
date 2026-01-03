@@ -1,0 +1,26 @@
+{
+    "name": "microservice-boilerplate",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "services/*",
+        "frontend"
+    ],
+    "scripts": {
+        "dev": "npx nx run-many --target=dev",
+        "start": "concurrently \"npm:backend:*\" \"npm:start:frontend\"",
+        "backend:user": "cd services/user-service && npm run dev",
+        "gateway": "cd services/gateway-service && npm run dev",
+        "dev:frontend": "cd frontend && npm run dev",
+        "start:front-gate": "concurrently \"npm run backend:gateway\" \"npm run start:frontend\"",
+        "backend": "nx run-many --target=dev --projects=user-service",
+        "db:local": "docker-compose up -d mongo",
+        "install:all": "npm install && cd services/user-service && npm install && cd ../gateway-service && npm install && cd ../../frontend && npm install",
+        "docker:up": "docker-compose up --build",
+        "docker:down": "docker-compose down"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "nx": "^22.3.3"
+    }
+}

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  gateway-service:
+    build:
+      context: ./services/gateway-service
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./env/shared.env
+    environment:
+      - SERVICE_PORT=4000
+      - USER_SERVICE_URL=http://user-service:4001
+    depends_on:
+      - user-service
+    volumes:
+      - ./services/gateway-service/src:/app/src
+    command: npm run dev
+
+  user-service:
+    build:
+      context: ./services/user-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./env/shared.env
+    environment:
+      - SERVICE_PORT=4001
+      - MONGO_URI_USER_SERVICE=mongodb://mongo:27017/user-service
+    depends_on:
+      - mongo
+    volumes:
+      - ./services/user-service/src:/app/src
+    command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./env/shared.env
+    depends_on:
+      - gateway-service
+    volumes:
+      - ./frontend/src:/app/src
+    command: npm run dev -- --host
+
+volumes:
+  mongo-data:
