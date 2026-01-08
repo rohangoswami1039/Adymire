@@ -22,9 +22,11 @@ async function start() {
             // Re-instantiate gateway/server on each retry to avoid cached failed state
             const gateway = new ApolloGateway({
                 supergraphSdl: new IntrospectAndCompose({
-                    subgraphs: [
-                        { name: 'users', url: process.env.USER_SERVICE_URL || 'http://localhost:4001/graphql' },
-                    ],
+                   subgraphs: [
+  { name: "user-service", url: "http://localhost:4000/graphql" },
+  { name: "identity-service", url: "http://localhost:4002/graphql" }
+]
+
                 }),
             });
 

@@ -12,6 +12,7 @@
         "backend:user": "cd services/user-service && npm run dev",
         "gateway": "cd services/gateway-service && npm run dev",
         "dev:frontend": "cd frontend && npm run dev",
+        "start:frontend": "cd frontend && npm run dev",
         "start:front-gate": "concurrently \"npm run backend:gateway\" \"npm run start:frontend\"",
         "backend": "nx run-many --target=dev --projects=user-service",
         "db:local": "docker-compose up -d mongo",
