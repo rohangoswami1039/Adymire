@@ -8,3 +8,4 @@ coverage
 .nx
 .idea
 *.log
+env/.env
